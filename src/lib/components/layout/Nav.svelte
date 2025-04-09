@@ -1,7 +1,7 @@
 <!--
 @component Nav
 
-Do not modify this file, as it is generated.
+Navigation component with smooth dropdown animations.
 -->
 <script lang="ts">
 	// Types
@@ -20,12 +20,13 @@ Do not modify this file, as it is generated.
 	// Utils
 	import { untrack } from "svelte";
 	import { beforeNavigate } from "$app/navigation";
-	import { computePosition, autoUpdate, size, shift } from "@floating-ui/dom";
+	import { computePosition, autoUpdate, offset, flip, shift } from "@floating-ui/dom";
 	import { animate } from "motion";
 	import { scrollY } from "svelte/reactivity/window";
 
 	// State
 	const DURATION = 500;
+	const DROPDOWN_ANIMATION_DURATION = 200;
 
 	let isMenuOpen: boolean = $state(false);
 	let scrollBarWidth: number = $state(0);
@@ -33,11 +34,11 @@ Do not modify this file, as it is generated.
 	let originalThemeColor: string | null = $state(null);
 	let isDesktopNavOpen = $state(false);
 	let activeDesktopNavItem: number = $state(null)!;
-	let activeChildItem: number | null = $state(null); // Track hovered child item
-	let lastActiveChildItem: number | null = $state(null); // Track last hovered child item
-	let itemRects: DOMRectReadOnly[] = $state([]);
+	let activeChildItem: number | null = $state(null); 
+	let lastActiveChildItem: number | null = $state(null); 
 	let itemElements: HTMLElement[] = $state([]);
-	let tooltip: HTMLElement | null = $state(null);
+	let dropdownElement: HTMLElement | null = $state(null);
+	let cleanupFn: (() => void) | null = $state(null);
 
 	// Deep filtering of navigation items to show only items that should appear in the nav
 	// and recursively filter their children as well
@@ -62,6 +63,7 @@ Do not modify this file, as it is generated.
 		const metaThemeColor = document.querySelector('meta[name="theme-color"]');
 		originalThemeColor = metaThemeColor?.getAttribute("content");
 	});
+
 	$effect(() => {
 		try {
 			// Handle body scroll locking when menu is open
@@ -117,48 +119,113 @@ Do not modify this file, as it is generated.
 		}
 	});
 
-	$effect(() => {
-		if (activeDesktopNavItem === null) return;
-
-		// untrack(() => {
-		const reference = itemElements[activeDesktopNavItem];
-		const referenceRect = itemRects[activeDesktopNavItem];
-		if (!reference || !tooltip || !referenceRect) return;
-
-		untrack(() => {
-			const cleanup = autoUpdate(reference, tooltip, () => {
-				computePosition(reference, tooltip, {
-					middleware: [
-						shift(),
-						size({
-							apply({ availableWidth, elements, x, y }) {
-								// Apply position
-
-								animate(
-									elements.floating,
-									{
-										x,
-										y: y + 10, // extra spacing that looks better visually
-										height: referenceRect.height,
-										maxHeight: `${referenceRect.height}px`,
-										maxWidth: `${Math.max(200, availableWidth)}px`
-									},
-									{
-										duration: 0.1,
-										easing: "ease-out"
-									}
-								);
-							}
-						})
-					]
-				});
+	// Function to position dropdown
+	function positionDropdown(index: number) {
+		if (!itemElements[index] || !dropdownElement) return;
+		
+		// Clean up previous positioning
+		if (cleanupFn) {
+			cleanupFn();
+			cleanupFn = null;
+		}
+		
+		const reference = itemElements[index];
+		
+		// Make dropdown visible but transparent initially
+		dropdownElement.style.display = 'grid';
+		dropdownElement.style.opacity = '0';
+		
+		// Setup positioning and animation
+		cleanupFn = autoUpdate(reference, dropdownElement, () => {
+			computePosition(reference, dropdownElement, {
+				placement: 'bottom-start',
+				middleware: [
+					offset(4),
+					flip(),
+					shift({ padding: 8 })
+				]
+			}).then(({ x, y }) => {
+				// Position the dropdown
+				dropdownElement.style.left = `${x}px`;
+				dropdownElement.style.top = `${y}px`;
+				
+				// Animate it in
+				animate(
+					dropdownElement, 
+					{ 
+						opacity: [0, 1],
+						transform: ['translateY(-10px)', 'translateY(0)']
+					}, 
+					{ 
+						duration: DROPDOWN_ANIMATION_DURATION,
+						easing: 'ease-out'
+					}
+				);
 			});
-
-			return () => {
-				cleanup();
-			};
 		});
-	});
+	}
+
+	// Handle hover state changes for main nav items
+	function handleNavItemHover(index: number) {
+		// Skip items without children
+		if (!navItems[index]?.children?.length) return;
+		
+		// Only reset lastActiveChildItem when switching to a different nav item
+		if (activeDesktopNavItem !== index) {
+			lastActiveChildItem = null;
+		}
+		
+		// Update active item
+		activeDesktopNavItem = index;
+		activeChildItem = null;
+		
+		// Show dropdown
+		isDesktopNavOpen = true;
+		
+		// Position dropdown
+		positionDropdown(index);
+	}
+
+	// Handle nav container mouse leave
+	function handleNavContainerLeave() {
+		// Hide dropdown with animation
+		if (dropdownElement && isDesktopNavOpen) {
+			animate(
+				dropdownElement, 
+				{ 
+					opacity: [1, 0],
+					transform: ['translateY(0)', 'translateY(-10px)']
+				}, 
+				{ 
+					duration: DROPDOWN_ANIMATION_DURATION / 2,
+					easing: 'ease-in'
+				}
+			).finished.then(() => {
+				if (!isDesktopNavOpen) { // Check again in case user hovered back
+					dropdownElement.style.display = 'none';
+				}
+			});
+		}
+		
+		// Reset states
+		isDesktopNavOpen = false;
+		activeDesktopNavItem = null;
+		activeChildItem = null;
+		
+		// Clean up positioning
+		if (cleanupFn) {
+			cleanupFn();
+			cleanupFn = null;
+		}
+	}
+	
+	// Handle child item hover
+	function handleChildItemHover(childIndex: number, hasImage: boolean) {
+		if (hasImage) {
+			activeChildItem = childIndex;
+			lastActiveChildItem = childIndex;
+		}
+	}
 </script>
 
 <svelte:window
@@ -187,11 +254,10 @@ Do not modify this file, as it is generated.
 			"items-between group/nav-list fixed inset-0 -z-10 m-0 grid h-[100dvh] content-between overflow-y-auto bg-white pt-32 transition duration-500 ease-out lg:hidden dark:bg-gray-900",
 
 			// State
-			"pointer-events-none  translate-y-[-100%] data-[show]:pointer-events-auto data-[show]:translate-y-0"
+			"pointer-events-none translate-y-[-100%] data-[show]:pointer-events-auto data-[show]:translate-y-0"
 		]}
 		data-show={isMenuOpen || null}
 	>
-		<!-- style:margin-right="{scrollBarWidth}px" -->
 		<ul class="nav-list section-px container mx-auto grid grid-cols-2 gap-12">
 			{#each navItems as item, index}
 				{@render linkOrGroup(item, index)}
@@ -219,30 +285,22 @@ Do not modify this file, as it is generated.
 			class="grid grid-flow-col items-center gap-2 [--gap:--spacing(1)]
 		[--inner-radius:calc(var(--radius)-var(--gap))]
 		[--radius:var(--radius-xl)]"
-			onmouseleave={() => {
-				isDesktopNavOpen = false;
-				activeChildItem = null;
-			}}
+			onmouseleave={handleNavContainerLeave}
 			role="navigation"
 		>
 			<div class="group mr-4 hidden grid-flow-col gap-5 lg:grid">
-				<!-- Transforming element -->
-
+				<!-- Dropdown container -->
 				<div
-					class={[
-						"fixed top-0 left-0 grid h-0 origin-top items-start overflow-hidden rounded-(--radius) border border-gray-100 bg-white text-gray-500 shadow-lg dark:border-gray-700 dark:bg-gray-800 dark:text-gray-300",
-						isDesktopNavOpen ? "" : "pointer-events-none scale-90 opacity-0 transition select-none"
-					]}
-					bind:this={tooltip}
-					style:height={itemRects[activeDesktopNavItem]?.height || 20}
-					style:width={itemRects[activeDesktopNavItem]?.height || 20}
+					bind:this={dropdownElement}
+					class="fixed z-50 grid items-start rounded-(--radius) border border-gray-100 bg-white text-gray-500 shadow-lg dark:border-gray-700 dark:bg-gray-800 dark:text-gray-300"
+					style="display: none;"
 				>
-					{#if activeDesktopNavItem !== null}
-						{@render dropdownContent(navigation[activeDesktopNavItem], activeDesktopNavItem)}
+					{#if activeDesktopNavItem !== null && isDesktopNavOpen}
+						{@render dropdownContent(navItems[activeDesktopNavItem], activeDesktopNavItem)}
 					{/if}
 				</div>
 
-				<!-- main buttons -->
+				<!-- Main nav items -->
 				{#each navItems as item, index (item.label)}
 					<svelte:element
 						this={item.children ? "button" : "a"}
@@ -252,35 +310,17 @@ Do not modify this file, as it is generated.
 						class="group group/item relative flex items-center gap-1 text-sm text-gray-500 hover:text-gray-700 dark:text-gray-300 dark:hover:text-gray-200"
 						data-item
 						{...item.children && {
-							onmouseover: () => {
-								if (activeDesktopNavItem !== index) {
-									// Only reset lastActiveChildItem when switching to a different nav item
-									lastActiveChildItem = null;
-								}
-								activeDesktopNavItem = index;
-								activeChildItem = null;
-								isDesktopNavOpen = true;
-							},
-
-							onfocus: () => {
-								if (activeDesktopNavItem !== index) {
-									// Only reset lastActiveChildItem when switching to a different nav item
-									lastActiveChildItem = null;
-								}
-								activeDesktopNavItem = index;
-								activeChildItem = null;
-								isDesktopNavOpen = true;
-							}
+							onmouseover: () => handleNavItemHover(index),
+							onfocus: () => handleNavItemHover(index)
 						}}
 					>
 						<span>{item.label}</span>
-						<!-- You might want an indicator here if item.children exists -->
 						{#if item.children}
 							<IconChevronDown
-								class="size-4 text-gray-400  transition group-hover/item:opacity-100 dark:text-gray-500 {activeDesktopNavItem ===
+								class="size-4 text-gray-400 transition group-hover/item:opacity-100 dark:text-gray-500 {activeDesktopNavItem ===
 									index && isDesktopNavOpen
 									? 'opacity-100'
-									: ''}"
+									: 'opacity-70'}"
 							/>
 						{/if}
 					</svelte:element>
@@ -303,11 +343,12 @@ Do not modify this file, as it is generated.
 </div>
 
 {#snippet dropdownContent(item: NavItem, index: number)}
-	<div bind:contentRect={itemRects[index]} class="grid-center">
+	<div class="grid-center p-(--gap)">
 		<div
-			class="grid items-start gap-(--gap) rounded-(--radius) p-(--gap)"
-			class:grid-cols-[1fr_1fr]={"image" in item ||
-				item.children?.some((child) => "image" in child)}
+			class="grid items-start gap-(--gap) rounded-(--radius)"
+			class:grid-cols-[1fr_1fr]={
+				"image" in item || item.children?.some((child) => "image" in child)
+			}
 		>
 			{#if item.image || item.children?.some((child) => "image" in child)}
 				{@const currentImage =
@@ -326,20 +367,13 @@ Do not modify this file, as it is generated.
 
 			<ul class="grid max-w-[20em] gap-(--gap)">
 				{#each item.children || [] as child, childIndex}
-					<li class="">
+					<li>
 						<a
 							href={child.href}
 							class="group/link-item grid min-w-[10em] gap-1 rounded-(--inner-radius) p-3 py-2 text-sm text-gray-700 hover:bg-gray-100 dark:text-gray-200 dark:hover:bg-gray-700"
 							role="menuitem"
-							onmouseenter={() => {
-								if (child.image) {
-									activeChildItem = childIndex;
-									lastActiveChildItem = childIndex;
-								}
-							}}
-							onmouseleave={() => {
-								activeChildItem = null;
-							}}
+							onmouseenter={() => handleChildItemHover(childIndex, !!child.image)}
+							onmouseleave={() => (activeChildItem = null)}
 						>
 							<span class="text-body font-medium">
 								{child.label}
