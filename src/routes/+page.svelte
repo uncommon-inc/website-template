@@ -28,6 +28,38 @@
 	text="Our technology delivers measurable results through secure, adaptable solutions that directly increase productivity and drive growth."
 />
 
+<Testimonials
+	testimonials={[
+		{
+			name: "Jane Smith",
+			position: "CTO",
+			company: "Tech Innovations",
+			quote:
+				"This solution transformed our workflow and increased productivity by 35% in just two months.",
+			image:
+				"https://images.unsplash.com/photo-1571513722275-4b41940f54b8?q=80&w=3687&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D"
+		},
+		{
+			name: "John Doe",
+			position: "Director of Operations",
+			company: "Global Solutions",
+			quote:
+				"The implementation was seamless and the support team was exceptional throughout the process.",
+			image:
+				"https://images.unsplash.com/photo-1600603405959-6d623e92445c?q=80&w=3687&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D"
+		},
+		{
+			name: "Sarah Johnson",
+			position: "Product Manager",
+			company: "Future Systems",
+			quote:
+				"We've tried multiple solutions, but this is the only one that perfectly addressed all our requirements.",
+			image:
+				"https://images.unsplash.com/photo-1531123897727-8f129e1688ce?q=80&w=3687&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D"
+		}
+	]}
+/>
+
 <Features
 	title="Features"
 	subtitle="Some features"
@@ -46,24 +78,10 @@
 			title: "Secure Collaboration",
 			description:
 				"Work together seamlessly while maintaining strict data privacy standards with our zero-knowledge architecture and military-grade encryption."
-		},
-		{
-			title: "Scalable Infrastructure",
-			description:
-				"Built to grow with your business, our platform handles increasing workloads and user numbers without performance degradation or additional configuration."
-		},
-		{
-			title: "Customizable Solutions",
-			description:
-				"Tailor our platform to your specific business needs with flexible modules and configurable workflows that adapt to your unique processes."
-		},
-		{
-			title: "24/7 Support",
-			description:
-				"Access our dedicated support team anytime with our guaranteed response time of under 1 hour, ensuring your business operations never skip a beat."
 		}
 	]}
 />
+
 <UseCases
 	title="Use Cases"
 	subtitle="Real-world applications for your business needs"
