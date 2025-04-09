@@ -232,7 +232,7 @@ Please update features according to the company's product offering. Do not remov
 									trailingZeroDisplay: "stripIfInteger"
 								}}
 								value={annual ? tier.yearlyPrice : tier.monthlyPrice}
-								suffix={annual ? "/year" : "/month"}
+								suffix="/month"
 							/>
 						{/if}
 					</div>
