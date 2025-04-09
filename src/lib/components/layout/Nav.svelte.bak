@@ -63,7 +63,6 @@ Do not modify this file, as it is generated.
 		const metaThemeColor = document.querySelector('meta[name="theme-color"]');
 		originalThemeColor = metaThemeColor?.getAttribute("content");
 	});
-
 	$effect(() => {
 		try {
 			// Handle body scroll locking when menu is open
@@ -230,7 +229,7 @@ Do not modify this file, as it is generated.
 			<div class="group mr-4 hidden grid-flow-col gap-5 lg:grid">
 				<!-- Transforming element -->
 
-				<!-- <div
+				<div
 					class={[
 						"fixed top-0 left-0 grid h-0 origin-top items-start overflow-hidden rounded-(--radius) border border-gray-100 bg-white text-gray-500 shadow-lg dark:border-gray-700 dark:bg-gray-800 dark:text-gray-300",
 						isDesktopNavOpen ? "" : "pointer-events-none scale-90 opacity-0 transition select-none"
@@ -239,10 +238,10 @@ Do not modify this file, as it is generated.
 					style:height={itemRects[activeDesktopNavItem]?.height || 20}
 					style:width={itemRects[activeDesktopNavItem]?.height || 20}
 				>
-				    {#if activeDesktopNavItem !== null}
+					{#if activeDesktopNavItem !== null}
 						{@render dropdownContent(navigation[activeDesktopNavItem], activeDesktopNavItem)}
 					{/if}
-				</div> -->
+				</div>
 
 				<!-- main buttons -->
 				{#each navItems as item, index (item.label)}
@@ -284,14 +283,6 @@ Do not modify this file, as it is generated.
 									? 'opacity-100'
 									: ''}"
 							/>
-
-							<div class="absolute top-0 left-0 pt-8 opacity-0 group-hover/item:opacity-100">
-								<div
-									class="aspect-video rounded-(--radius) bg-white text-start shadow-2xl ring-1 ring-gray-100"
-								>
-									{@render dropdownContent(item, index)}
-								</div>
-							</div>
 						{/if}
 					</svelte:element>
 				{/each}
@@ -319,18 +310,20 @@ Do not modify this file, as it is generated.
 			class:grid-cols-[1fr_1fr]={"image" in item ||
 				item.children?.some((child) => "image" in child)}
 		>
-			<!-- {#if item.children?.some((child) => "image" in child)} -->
+			{#if item.image || item.children?.some((child) => "image" in child)}
+				{@const currentImage =
+					activeChildItem !== null && item.children?.[activeChildItem]?.image
+						? item.children[activeChildItem].image
+						: lastActiveChildItem !== null && item.children?.[lastActiveChildItem]?.image
+							? item.children[lastActiveChildItem].image
+							: item.children?.find((child) => child.image)?.image || item.image}
 
-			<div class="grid">
-				{#each item.children.map((c) => c.image) as image}
-					<img
-						class="grid-center row-span-full aspect-square h-full max-h-80 rounded-(--inner-radius) bg-gray-200 object-cover transition-opacity duration-300 dark:bg-gray-700"
-						src={image}
-						alt=""
-					/>
-				{/each}
-			</div>
-			<!-- {/if} -->
+				<img
+					class="row-span-full aspect-square h-full max-h-80 rounded-(--inner-radius) bg-gray-200 object-cover transition-opacity duration-300 dark:bg-gray-700"
+					src={currentImage}
+					alt=""
+				/>
+			{/if}
 
 			<ul class="grid max-w-[20em] gap-(--gap)">
 				{#each item.children || [] as child, childIndex}
