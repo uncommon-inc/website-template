@@ -59,7 +59,7 @@ export const navigation: NavItem[] = [
 		children: [
 			{
 				label: "Healthcare",
-				href: "/industries/healthcare",
+				href: "/use-cases/healthcare",
 				image:
 					"https://images.unsplash.com/photo-1532938911079-1b06ac7ceec7?q=80&w=1920&auto=format&fit=crop",
 				description: "Innovative solutions for patient care",
@@ -68,7 +68,7 @@ export const navigation: NavItem[] = [
 			},
 			{
 				label: "Finance",
-				href: "/industries/finance",
+				href: "/use-cases/finance",
 				image:
 					"https://images.unsplash.com/photo-1638913662180-afc4334cf422?q=80&w=3870&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D",
 				description: "Streamlining operations and compliance",
@@ -77,7 +77,7 @@ export const navigation: NavItem[] = [
 			},
 			{
 				label: "Technology",
-				href: "/industries/technology",
+				href: "/use-cases/technology",
 				image:
 					"https://images.unsplash.com/photo-1518770660439-4636190af475?q=80&w=2070&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D",
 				description: "Cutting-edge tools for tech companies",
@@ -86,7 +86,7 @@ export const navigation: NavItem[] = [
 			},
 			{
 				label: "Education",
-				href: "/industries/education",
+				href: "/use-cases/education",
 				image:
 					"https://images.unsplash.com/photo-1503676260728-1c00da094a0b?q=80&w=3870&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D",
 				description: "Enhancing learning experiences",
