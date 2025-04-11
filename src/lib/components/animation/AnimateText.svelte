@@ -7,7 +7,8 @@
 	let {
 		text = "",
 		oncomplete = () => {},
-		show = $bindable(false)
+		show = $bindable(false),
+		block = $bindable(false)
 	}: { text: string; show?: boolean; oncomplete?: () => void } = $props();
 
 	// State
@@ -16,7 +17,9 @@
 
 	function handleWordIntroEnd(index: number) {
 		if (index + 1 === words.length) {
-			oncomplete();
+			setTimeout(() => {
+				oncomplete();
+			}, 500);
 		}
 	}
 
@@ -36,7 +39,7 @@
 		<span
 			class="animated-word inline-block origin-left"
 			style:--delay="{i * 100}ms"
-			onanimationend={() => handleWordIntroEnd(i)}
+			onanimationstart={() => handleWordIntroEnd(i)}
 		>
 			{word}
 		</span>{" "}

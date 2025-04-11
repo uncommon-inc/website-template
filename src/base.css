@@ -18,6 +18,9 @@
 	--color-emphasis-low: var(--color-gray-500);
 	--color-emphasis-medium: var(--color-gray-700);
 	--color-emphasis-high: var(--color-gray-950);
+
+	/* Background colors */
+	--color-bg-primary: var(--color-white);
 }
 
 :where([data-theme="dark"], [data-theme="dark"] *) {
@@ -26,6 +29,14 @@
 		--color-emphasis-low: var(--color-gray-500);
 		--color-emphasis-medium: var(--color-gray-300);
 		--color-emphasis-high: var(--color-gray-50);
+
+		/* Background colors for dark mode */
+		--color-bg-primary: var(--color-gray-950);
+		--color-bg-secondary: var(--color-gray-900);
+		--color-bg-tertiary: var(--color-gray-800);
+		--color-bg-accent: var(--color-primary-900);
+		--color-bg-hover: var(--color-gray-800);
+		--color-bg-active: var(--color-gray-700);
 	}
 }
 

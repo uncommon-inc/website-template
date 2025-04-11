@@ -38,7 +38,6 @@ Please update features according to the company's product offering. Do not remov
 		title = "Simple, transparent pricing",
 		subtitle = "Choose the plan that works best for your needs",
 		tierNames = ["Starter", "Pro", "Enterprise"],
-		caption = "Compare all features",
 		features = [
 			{
 				name: "Projects",
@@ -214,7 +213,7 @@ Please update features according to the company's product offering. Do not remov
 			<div
 				class="flex flex-col rounded-xl bg-white p-6 ring ring-gray-200 transition-all duration-300 dark:bg-gray-800 dark:ring-gray-700"
 				class:ring-2={tier.highlight}
-				class:ring-primary-500={tier.highlight}
+				class:ring-primary={tier.highlight}
 				class:dark:ring-primary-700={tier.highlight}
 				class:translate-y-[-4px]={tier.highlight}
 			>
@@ -266,14 +265,14 @@ Please update features according to the company's product offering. Do not remov
 	</div>
 	<div class="mt-32">
 		<!-- Responsive table wrapper with horizontal scroll on mobile -->
-		<div class="-mx-4 hidden overflow-x-auto px-4 sm:mx-0 sm:block sm:px-0">
+		<!-- <div class=" hidden overflow-x-auto px-4 sm:mx-0 sm:block sm:px-0">
 			<table
 				class="w-full min-w-full border-separate border-spacing-0 border-gray-200 text-left dark:border-gray-700"
 			>
 				<thead>
 					<tr>
 						<th
-							class="sticky left-0 min-w-[120px] border-b border-gray-200 bg-white p-4 dark:border-gray-700 dark:bg-gray-900"
+							class="sticky left-0 min-w-[120px] border-b border-gray-200 bg-white dark:border-gray-700 dark:bg-gray-900"
 						>
 							<span class="sr-only">Feature</span>
 						</th>
@@ -289,9 +288,7 @@ Please update features according to the company's product offering. Do not remov
 				<tbody>
 					{#each features as feature}
 						<tr>
-							<td
-								class="sticky left-0 min-w-[120px] border-b border-gray-200 py-4 dark:border-gray-700 dark:bg-gray-900"
-							>
+							<td class="text-caption">
 								{feature.name}
 							</td>
 							{#each tierNames as tierName}
@@ -315,38 +312,51 @@ Please update features according to the company's product offering. Do not remov
 					{/each}
 				</tbody>
 			</table>
-		</div>
+		</div> -->
 
 		<!-- Mobile feature comparison (alternative view for very small screens) -->
-		<div class="mt-8 block divide-y-1 sm:hidden">
-			<div class="mb-8">
-				<!-- Display tier names once at the top -->
-				<div class="sticky top-12 left-0 grid grid-cols-3 gap-3 bg-white py-8">
-					{#each tierNames as tierName}
-						<div class="text-headline">{tierName}</div>
-					{/each}
-				</div>
-
-				{#each features as feature}
-					<div class="mb-6 border-b border-gray-200 pb-6 dark:border-gray-700">
-						<h4 class="text-headline mb-8">{feature.name}</h4>
-						<div class="grid grid-cols-3 gap-3">
-							{#each tierNames as tierName}
-								<div class="flex justify-start">
-									{#if typeof feature.tiers[tierName] === "boolean"}
-										{#if feature.tiers[tierName]}
-											<IconCheck class="text-primary-600 dark:text-primary-400 size-5" />
-										{:else}
-											<IconX class="size-5 text-gray-400" />
-										{/if}
-									{:else}
-										<span class="text-body">{feature.tiers[tierName]}</span>
-									{/if}
-								</div>
+		<div>
+			<!-- Universal pricing comparison for mobile -->
+			<div class="overflow-x-auto">
+				<table class="w-full border-collapse">
+					<!-- Sticky header with tier names -->
+					<thead class="sticky top-0 z-10 border-b border-gray-200">
+						<tr>
+							<th class="min-w-[120px] py-3 text-left">
+								<span class="sr-only">Feature</span>
+							</th>
+							{#each tierNames as tierName, i}
+								<th class="text-caption min-w-[100px] py-3 text-left dark:text-white">
+									{tierName}
+								</th>
 							{/each}
-						</div>
-					</div>
-				{/each}
+						</tr>
+					</thead>
+					<tbody class="divide-y divide-gray-200 dark:divide-gray-700">
+						{#each features as feature}
+							<tr>
+								<td class="text-body py-3 pr-8 font-medium lg:pr-0 dark:text-white">
+									{feature.name}
+								</td>
+								{#each tierNames as tierName, i}
+									<td class="py-3">
+										{#if typeof feature.tiers[tierName] === "boolean"}
+											{#if feature.tiers[tierName]}
+												<IconCheck class="text-primary-900 dark:text-primary-400 size-5" />
+											{:else}
+												<IconX class="size-5 text-gray-400" />
+											{/if}
+										{:else}
+											<span class="text-callout font-medium text-gray-700 dark:text-gray-300">
+												{feature.tiers[tierName]}
+											</span>
+										{/if}
+									</td>
+								{/each}
+							</tr>
+						{/each}
+					</tbody>
+				</table>
 			</div>
 		</div>
 	</div>

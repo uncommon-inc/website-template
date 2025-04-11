@@ -42,16 +42,14 @@
 	});
 </script>
 
-<section
-	class="[--gap:--spacing(4)] [--inner-radius:calc(var(--radius)-var(--gap))] [--radius:var(--radius-xl)]"
->
+<section class="[--gap:--spacing(4)] [--inner-radius:calc(var(--radius)-var(--gap))]">
 	<div class="section-px section-py container mx-auto grid">
 		<SectionHeader {title} {subtitle} />
 
 		<div class="grid gap-(--gap) rounded-(--radius) lg:grid-cols-[1fr_2fr]">
 			<!-- Left column: Use cases list -->
 			<div
-				class="items-between row-start-2 grid content-between gap-8 rounded-(--radius) bg-gray-50 p-(--gap) lg:row-start-auto dark:bg-gray-900"
+				class="items-between bg-card border-border row-start-2 grid content-between gap-8 rounded-(--radius) border p-(--gap) lg:row-start-auto"
 			>
 				<div>
 					{#each useCases as useCase, index}

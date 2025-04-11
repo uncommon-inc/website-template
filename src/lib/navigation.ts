@@ -53,6 +53,12 @@ export const cta = {
 
 export const navigation: NavItem[] = [
 	{
+		label: "Pricing",
+		href: "/pricing",
+		showInNav: true,
+		showInFooter: false
+	},
+	{
 		label: "Use Cases",
 		showInNav: true,
 		showInFooter: true,
@@ -94,12 +100,6 @@ export const navigation: NavItem[] = [
 				showInFooter: true
 			}
 		]
-	},
-	{
-		label: "Pricing",
-		href: "/pricing",
-		showInNav: true,
-		showInFooter: false
 	},
 	{
 		label: "Company",

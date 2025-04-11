@@ -1,9 +1,5 @@
 <script lang="ts">
-	// Types
-	import type { PageProps } from "./$types";
-
 	// Components
-	import Hero from "$lib/components/layout/Hero.svelte";
 	import UseCases from "$lib/components/layout/UseCases.svelte";
 	import Summary from "$lib/components/layout/Summary.svelte";
 	import Features from "$lib/components/layout/Features.svelte";
@@ -11,17 +7,47 @@
 	import CallToAction from "$lib/components/layout/CallToAction.svelte";
 	import AboutTeaser from "$lib/components/layout/AboutTeaser.svelte";
 	import LogoScroller from "$lib/components/layout/LogoScroller.svelte";
-
-	// Props
-	const { data }: PageProps = $props();
+	import CustomerCardHero from "$lib/components/layout/hero-sections/CustomerCardHero.svelte";
 </script>
 
-<Hero
+<CustomerCardHero
 	title="Elevate your business with thoughtful design"
-	subtitle="Design solutions that enhance user experience, improve visual communication, and future-proof your brand identity."
-	imageSrc="https://images.unsplash.com/photo-1725027090555-40b031f52b01?q=80&w=3870&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D"
+	subtitle="Solutions that enhance user experience, and improve visual communication."
+	customers={[
+		{
+			name: "Jane Smith",
+			position: "CTO at Tech Innovations",
+
+			imageSrc:
+				"https://images.unsplash.com/flagged/photo-1555475693-6e207bee0737?q=80&w=3687&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D"
+		},
+		{
+			name: "Michael Johnson",
+			position: "Director of Marketing at Global Solutions",
+			imageSrc:
+				"https://plus.unsplash.com/premium_photo-1671656349322-41de944d259b?q=80&w=3578&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D"
+		},
+		{
+			name: "Sarah Williams",
+			position: "Product Designer at Future Systems",
+			imageSrc:
+				"https://images.unsplash.com/photo-1632765854612-9b02b6ec2b15?q=80&w=2586&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D"
+		},
+		{
+			name: "Robert Chen",
+			position: "CEO at Apex Innovations",
+			imageSrc:
+				"https://plus.unsplash.com/premium_photo-1727942413448-2f06f240e743?q=80&w=3687&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D"
+		},
+		{
+			name: "Emily Rodriguez",
+			position: "Creative Director at Design Forward",
+			imageSrc:
+				"https://plus.unsplash.com/premium_photo-1708276242787-387acf1bbd4b?q=80&w=3735&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D"
+		}
+	]}
 />
-<LogoScroller />
+<LogoScroller label="" />
 
 <Summary
 	title="What we do"
@@ -35,7 +61,7 @@
 			position: "CTO",
 			company: "Tech Innovations",
 			quote:
-				"This solution transformed our workflow and increased productivity by 35% in just two months.",
+				"Their cutting-edge automation boosted our productivity by 35%.\nThe intuitive interface reduced training time and improved team adoption.",
 			image:
 				"https://images.unsplash.com/photo-1571513722275-4b41940f54b8?q=80&w=3687&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D"
 		},
@@ -44,7 +70,7 @@
 			position: "Director of Operations",
 			company: "Global Solutions",
 			quote:
-				"The implementation was seamless and the support team was exceptional throughout the process.",
+				"Their robust security protocols gave us confidence in handling sensitive data.\nThe 24/7 support team resolved issues within hours, not days.",
 			image:
 				"https://images.unsplash.com/photo-1600603405959-6d623e92445c?q=80&w=3687&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D"
 		},
@@ -53,7 +79,7 @@
 			position: "Product Manager",
 			company: "Future Systems",
 			quote:
-				"We've tried multiple solutions, but this is the only one that perfectly addressed all our requirements.",
+				"The scalable platform grew seamlessly with our business needs.\nTheir customization options allowed us to tailor solutions perfectly to our workflows.",
 			image:
 				"https://images.unsplash.com/photo-1531123897727-8f129e1688ce?q=80&w=3687&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D"
 		}

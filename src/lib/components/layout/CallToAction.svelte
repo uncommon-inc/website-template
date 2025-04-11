@@ -29,7 +29,7 @@
     - `subtitle`: Secondary heading text (string)
     - `description`: Detailed information about the offer (string)
     - `callsToAction`: Array of CTA objects with href, label, and optional variant properties (CTA[])
-    - `image`: portrait of the company's customer smiling at the camera.
+    - `imageSrc`: portrait of the company's customer smiling at the camera.
 -->
 
 <script lang="ts">
@@ -53,13 +53,13 @@
 		title = "Get started today",
 		subtitle = "Join now",
 		description = "Ready to experience the difference? Join our community of satisfied customers and see how our solution can transform your workflow. ",
-		image,
+		imageSrc = "https://images.unsplash.com/photo-1573497019940-1c28c88b4f3e?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1200&q=80",
 		callsToAction = [cta]
 	}: {
 		title?: string;
 		subtitle?: string;
 		description?: string;
-		image?: string;
+		imageSrc?: string;
 		callsToAction?: CTA[];
 	} = $props();
 </script>
@@ -67,7 +67,7 @@
 <div class="">
 	<section class="section-px section-py container mx-auto">
 		<div
-			class="grid content-start items-center justify-between gap-(--gap) rounded-(--radius) bg-gray-50 p-(--gap) text-balance [--gap:--spacing(8)] [--inner-radius:calc(var(--radius)-var(--gap))] [--radius:var(--radius-3xl)] lg:grid-cols-[2fr_1fr] dark:bg-gray-800"
+			class="bg-card border-border grid content-start items-center justify-between gap-(--gap) rounded-(--radius) border p-(--gap) text-balance [--gap:--spacing(8)] [--inner-radius:calc(var(--radius)-var(--gap))] [--radius:var(--radius-xl)] lg:grid-cols-[2fr_1fr]"
 		>
 			<div class="items-between grid h-full content-between gap-16">
 				<h2 class="text-title1 mb-3 flex flex-col">
@@ -88,8 +88,7 @@
 				</div>
 			</div>
 			<img
-				src={image ??
-					"https://images.unsplash.com/photo-1573497019940-1c28c88b4f3e?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1200&q=80"}
+				src={imageSrc}
 				alt="Visual comparison showing product benefits"
 				class="hidden aspect-[4/5] size-full max-h-full w-full rounded-[calc(max(var(--inner-radius),.25rem))] object-cover lg:block"
 			/>

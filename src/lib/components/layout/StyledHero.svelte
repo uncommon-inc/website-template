@@ -1,10 +1,10 @@
 <!--
     @component
-    Bold hero banner with eye-catching text and strong call-to-action. NEVER use title case.
+    Styled hero banner with themed background colors and eye-catching text.
 
     Usage:
     ```html
-    <Hero
+    <StyledHero
       title="Bold Claim"
       subtitle="Quick Value"
       imageSrc="/hero.jpg"
@@ -55,37 +55,39 @@
 	let { title, subtitle, imageSrc, callsToAction = [cta] }: Props = $props();
 </script>
 
-<header
-	class="section-px container mx-auto grid items-end gap-16 gap-y-9 py-12 pt-24 text-balance xl:grid-cols-[1fr_auto]"
-	data-enter-container
->
-	<h1 class="text-display w-full" data-enter>
-		<span class="block"><AnimateText text={title} /></span>
-		<span class="text-emphasis-dim block"><AnimateText text={subtitle} /></span>
-	</h1>
+<div class="w-full bg-[var(--color-bg-secondary)]">
+	<header
+		class="section-px container mx-auto grid items-end gap-16 gap-y-9 py-12 pt-24 text-balance xl:grid-cols-[1fr_auto]"
+		data-enter-container
+	>
+		<h1 class="text-display w-full" data-enter>
+			<span class="block"><AnimateText text={title} /></span>
+			<span class="text-emphasis-dim block"><AnimateText text={subtitle} /></span>
+		</h1>
 
-	{#if callsToAction.length > 0}
-		<div class="flex gap-4" data-enter>
-			{#each callsToAction as cta, index}
-				<Button
-					href={cta.href}
-					size="lg"
-					variant={index % 2 === 0 ? "primary" : "secondary"}
-					class="max-lg:hidden">{cta.label}</Button
-				>
-				<Button
-					href={cta.href}
-					size="md"
-					variant={index % 2 === 0 ? "primary" : "secondary"}
-					class="lg:hidden">{cta.label}</Button
-				>
-			{/each}
+		{#if callsToAction.length > 0}
+			<div class="flex gap-4" data-enter>
+				{#each callsToAction as cta, index}
+					<Button
+						href={cta.href}
+						size="lg"
+						variant={index % 2 === 0 ? "primary" : "secondary"}
+						class="max-lg:hidden">{cta.label}</Button
+					>
+					<Button
+						href={cta.href}
+						size="md"
+						variant={index % 2 === 0 ? "primary" : "secondary"}
+						class="lg:hidden">{cta.label}</Button
+					>
+				{/each}
+			</div>
+		{/if}
+	</header>
+
+	{#if imageSrc}
+		<div class="col-span-full aspect-video px-4 md:px-8 lg:px-10" data-enter>
+			<img src={imageSrc} alt="Hero" class="size-full object-cover" onerror={handleImageError} />
 		</div>
 	{/if}
-</header>
-
-{#if imageSrc}
-	<div class="col-span-full aspect-video" data-enter>
-		<img src={imageSrc} alt="Customer" class="size-full object-cover" onerror={handleImageError} />
-	</div>
-{/if}
+</div>

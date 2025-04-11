@@ -126,7 +126,7 @@
 
 <section
 	bind:this={wrapperRef}
-	class="text-pretty [--gap:--spacing(4)] [--inner-radius:calc(var(--radius)-var(--gap))] [--radius:var(--radius-3xl)]"
+	class="text-pretty [--gap:--spacing(4)]"
 	style="height: calc(100vh * {testimonials.length});"
 >
 	<div
@@ -134,27 +134,36 @@
 	>
 		<div
 			bind:this={carouselRef}
-			class="flex w-full gap-(--card-gap) pr-8 [--card-gap:--spacing(6)]"
+			class={[
+				"flex w-full gap-(--card-gap) pr-8 [--card-gap:--spacing(6)]",
+				"[--inner-radius:calc(var(--outer-radius)-var(--gap))] [--outer-radius:var(--radius)] lg:[--outer-radius:var(--radius-xl)]"
+			]}
 		>
 			{#each testimonials as testimonial}
 				<article
-					class="lg:container-xs items-between grid aspect-video max-w-full min-w-full transform-gpu grid-cols-1 gap-8 rounded-(--radius) bg-gray-50 p-(--gap) transition-transform duration-200 ease-[cubic-bezier(0.16,1,0.3,1)] will-change-transform contain-layout lg:max-h-[60ch] lg:min-w-[50%] lg:grid-cols-[2fr_3fr] dark:bg-gray-900 dark:text-white"
+					class={[
+						"lg:container-xs lg:max-h-[60ch] lg:min-w-[50%] lg:grid-cols-[2fr_3fr]",
+						"items-between grid grid-cols-1 gap-8",
+						"bg-card dark:text-white",
+						"aspect-video max-w-full min-w-full",
+						"transform-gpu transition-transform duration-200 ease-[cubic-bezier(0.16,1,0.3,1)] will-change-transform",
+						"rounded-(--outer-radius) p-(--gap)",
+						"border-border border contain-layout"
+					]}
 					style:transform="translateX(calc(-{scrollProgress} * {maxScrollDistance}px))"
 				>
-					<div class="hidden rounded-(--inner-radius) lg:block">
+					<div class="hidden overflow-clip rounded-[max(var(--inner-radius),2px)] lg:block">
 						{#if testimonial.image}
 							<img
 								src={testimonial.image}
 								alt="{testimonial.name} testimonial"
 								loading="lazy"
-								class="aspect-[3/4] h-full w-full rounded-(--inner-radius) object-cover"
+								class="aspect-[3/4] h-full w-full object-cover"
 							/>
 						{/if}
 					</div>
 					<div class="flex flex-col justify-between gap-12">
-						<q class="text-title2 text-emphasis-high max-w-prose dark:text-white"
-							>{testimonial.quote}</q
-						>
+						<q class="text-title2 max-w-prose dark:text-white">{testimonial.quote}</q>
 						<cite class="text-caption flex items-center gap-3 not-italic">
 							{#if testimonial.image}
 								<img
@@ -165,8 +174,8 @@
 								/>
 							{/if}
 							<div>
-								<p class="text-callout dark:text-gray-200">{testimonial.name}</p>
-								<p class="text-emphasis-low dark:text-gray-400">
+								<p class="text-callout">{testimonial.name}</p>
+								<p class="text-muted-foreground">
 									{testimonial.position}, {testimonial.company}
 								</p>
 							</div>

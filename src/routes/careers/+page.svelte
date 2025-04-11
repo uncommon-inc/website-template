@@ -5,7 +5,7 @@
 	import SectionHeader from "$lib/components/layout/SectionHeader.svelte";
 	import Culture from "$lib/components/layout/Culture.svelte";
 	import Testimonials from "$lib/components/layout/Testimonials.svelte";
-	import SecondaryHero from "$lib/components/layout/SecondaryHero.svelte";
+	import SecondaryHero from "$lib/components/layout/hero-sections/SecondaryHero.svelte";
 	import Card from "$lib/components/ui/Card.svelte";
 	import JobList, { type JobOpening } from "./JobList.svelte";
 
@@ -208,14 +208,6 @@
 
 <!-- Culture Section -->
 <Culture {values} />
-
-<!-- Employee Testimonials Section -->
-<section class={SECTION_BASE_CLASSES}>
-	<SectionHeader
-		title="Hear from our team"
-		subtitle="What our employees have to say about working here"
-	/>
-</section>
 
 <Testimonials testimonials={employeeTestimonials} />
 

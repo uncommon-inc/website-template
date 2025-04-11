@@ -13,6 +13,9 @@
 
 	import { MediaQuery } from "svelte/reactivity";
 	import { browser } from "$app/environment";
+	import { page } from "$app/state";
+	import { CONFIG } from "$lib/content";
+	import { navHeight } from "$lib/state/nav.svelte";
 
 	const isTouchDevice = new MediaQuery("(pointer: coarse)");
 
@@ -69,24 +72,39 @@
 
 	<link rel="preconnect" href="https://fonts.googleapis.com" />
 	<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin="anonymous" />
-	<link
+	<!-- <link
 		href="https://fonts.googleapis.com/css2?family={encodeURIComponent(
-			data.meta.fontFamily
+			page.data.meta.fontFamily
 		)}:ital,wght@0,400..800;1,400..800&display=swap"
 		rel="stylesheet"
+	/> -->
+	<link
+		href="https://fonts.googleapis.com/css2?family={encodeURIComponent(
+			CONFIG.fontFamily
+		)}&display=swap"
+		rel="stylesheet"
 	/>
+
+	<!-- eslint-disable -->
+	{@html `
+    	<style>
+    	   :root {
+    			--font-family: "${CONFIG.fontFamily}";
+                --font-body: var(--font-family), var(--font-fallback);
+    		}
+    	</style>
+	`}
 </svelte:head>
 
 <div
+	style:--nav-height="{navHeight.current}px"
 	class="isolate bg-inherit"
 	class:touch={isTouchDevice.current === true}
 	class:no-touch={isTouchDevice.current !== true}
 >
-	<div class="bg-white dark:bg-gray-950">
-		<Nav />
+	<Nav />
 
-		{@render children()}
-	</div>
+	{@render children()}
 
 	<Footer />
 </div>

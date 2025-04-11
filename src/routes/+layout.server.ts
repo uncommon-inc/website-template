@@ -1,15 +1,14 @@
 // Types
+import { CONFIG } from "$lib/content";
 import type { LayoutServerLoad } from "./$types";
-
-// Content
-import { METADATA } from "$lib/content";
 
 export const load: LayoutServerLoad = async () => {
 	return {
-		// content: CONTENT['/'],
-		// layout: LAYOUT,
 		meta: {
-			...METADATA
+			title: CONFIG.companyName,
+			description: CONFIG.description,
+			image: CONFIG.image,
+			url: CONFIG.url
 		}
 	};
 };

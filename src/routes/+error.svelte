@@ -1,15 +1,14 @@
 <script lang="ts">
-	import Button from "$lib/components/ui/Button.svelte";
+	import { page } from "$app/state";
 
-	// Constants
-	const { data } = $props();
+	import Button from "$lib/components/ui/Button.svelte";
 </script>
 
 <div class="flex min-h-screen flex-col items-center justify-center">
 	<div class="mx-auto w-full max-w-md text-center">
-		<h1 class="text-display mb-2 text-gray-800 dark:text-gray-100">{data.status || 404}</h1>
+		<h1 class="text-display mb-2 text-gray-800 dark:text-gray-100">Error {page.status}</h1>
 		<p class="text-body mb-8 text-gray-600 dark:text-gray-300">
-			{data.message || "The page you're looking for doesn't exist."}
+			{page.error?.message}
 		</p>
 
 		<Button href="/">Go back home</Button>

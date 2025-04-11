@@ -25,7 +25,7 @@
 
 <div
 	data-scroller
-	class="grid place-items-center gap-4 self-end py-4 sm:py-12"
+	class="grid place-items-center gap-4 self-end py-4 {label ? 'sm:py-12' : 'sm:py-8'}"
 	class:!flex={layout === "horizontal"}
 	class:dark={mode === "dark"}
 >

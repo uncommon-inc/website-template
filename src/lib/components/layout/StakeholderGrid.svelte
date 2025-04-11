@@ -46,15 +46,14 @@
 	});
 </script>
 
-<section class="bg-white dark:bg-gray-950">
-	<div
-		class="section-py section-px container mx-auto grid [--gap:--spacing(4)] [--radius:var(--radius-2xl)]"
-	>
+<section class="">
+	<div class="section-py section-px container mx-auto grid [--gap:--spacing(4)]">
 		<SectionHeader {title} {subtitle} />
 
 		<div
-			class="grid gap-(--gap)"
-			style:grid-template-columns="repeat(auto-fit, minmax(200px, 1fr))"
+			class="grid grid-cols-1 gap-(--gap) {stakeholders.length === 1
+				? 'md:grid-cols-3'
+				: 'md:grid-cols-2 lg:grid-cols-4'}"
 		>
 			{#snippet card(
 				{
@@ -74,10 +73,13 @@
 					bind:this={cards[index]}
 					class={[
 						"card bg-gray-50 opacity-0 dark:bg-gray-900",
-						"relative isolate grid aspect-[4/5] content-end items-end gap-10 overflow-hidden rounded-(--radius)  bg-cover p-(--gap) [--inner-radius:calc(var(--radius)-var(--gap))] ",
-						type === "join" ? "bg-primary-400" : ""
+						"bg-cover",
+						"relative isolate grid aspect-[4/5] content-end items-end gap-10 overflow-hidden rounded-(--radius) bg-cover p-(--gap) [--inner-radius:calc(var(--radius)-var(--gap))] ",
+						type === "join" ? "bg-primary" : ""
 					]}
-					style={type === "join" ? "" : `background-image: url('${image}')`}
+					style={type === "join"
+						? ""
+						: `background-image: url('${image}'); background-position: center; background-size: cover;`}
 				>
 					{#if type === "team" && stakeholderType === "team"}
 						<div

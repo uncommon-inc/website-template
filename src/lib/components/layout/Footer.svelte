@@ -4,8 +4,7 @@
 	import { navigation } from "$lib/navigation";
 
 	// Components
-	import Logo from "$lib/components/Logo.svelte";
-	import { METADATA } from "$lib/content";
+	import { CONFIG } from "$lib/content";
 	import Signature from "./Signature.svelte";
 
 	// Props
@@ -13,7 +12,7 @@
 </script>
 
 <footer
-	class=" inset-x-0 bottom-0 -z-10 grid overflow-hidden bg-white dark:bg-gray-950 dark:text-white"
+	class="inset-x-0 bottom-0 -z-10 grid overflow-hidden"
 	aria-labelledby="footer-heading"
 	{...props}
 >
@@ -24,7 +23,7 @@
 		<div class="text-headline flex items-center gap-4">
 			<!-- <Logo class="size-7" /> -->
 			<div class="text-headline">
-				{METADATA.companyName}<sup class="ml-0.5 align-super text-[.25em] text-gray-800">TM</sup>
+				{CONFIG.companyName}<sup class="ml-0.5 align-super text-[.25em] text-gray-800">TM</sup>
 			</div>
 		</div>
 
@@ -63,7 +62,7 @@
 		>
 			<div class="grid grid-cols-2 items-start justify-between gap-4 gap-x-32 text-sm">
 				<div>
-					&copy; {METADATA.companyName}
+					&copy; {CONFIG.companyName}
 					{new Date().getFullYear()}
 				</div>
 				<div class="flex items-baseline justify-end gap-3 lg:justify-start">

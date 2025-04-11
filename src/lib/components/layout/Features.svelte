@@ -26,9 +26,7 @@
 	);
 </script>
 
-<section
-	class="[--gap:--spacing(2)] [--inner-radius:calc(var(--radius)-var(--gap))] [--radius:var(--radius-xl)]"
->
+<section class="[--gap:--spacing(2)]">
 	<div class="section-px section-py container mx-auto grid">
 		<SectionHeader {title} {subtitle} />
 

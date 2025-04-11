@@ -3,7 +3,7 @@
 	import type { PageProps } from "./$types";
 
 	// Components
-	import Hero from "$lib/components/layout/Hero.svelte";
+	import Hero from "$lib/components/layout/hero-sections/Hero.svelte";
 
 	import Summary from "$lib/components/layout/Summary.svelte";
 	import Features from "$lib/components/layout/Features.svelte";

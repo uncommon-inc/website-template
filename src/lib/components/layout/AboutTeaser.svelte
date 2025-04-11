@@ -27,7 +27,7 @@ A minimalist teaser for the about page.
 	};
 </script>
 
-<section bind:this={sectionRef} class="bg-white dark:bg-gray-950">
+<section bind:this={sectionRef}>
 	<div class="section-px section-py container mx-auto">
 		<div class="relative mx-auto grid max-w-2xl place-items-center gap-16">
 			<ScrollText
