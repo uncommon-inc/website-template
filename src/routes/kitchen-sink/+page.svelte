@@ -336,7 +336,7 @@
 
 			<div class="grid grid-cols-2 gap-4 md:grid-cols-4">
 				<div
-					class="bg-gray-100 p-4"
+					class="p-4"
 					style="border-radius: var(--radius-xs); background-color: var(--color-muted);"
 				>
 					<div class="text-caption font-medium">XS</div>
@@ -344,7 +344,7 @@
 				</div>
 
 				<div
-					class="bg-gray-100 p-4"
+					class="p-4"
 					style="border-radius: var(--radius-sm); background-color: var(--color-muted);"
 				>
 					<div class="text-caption font-medium">SM</div>
@@ -352,7 +352,7 @@
 				</div>
 
 				<div
-					class="bg-gray-100 p-4"
+					class="p-4"
 					style="border-radius: var(--radius); background-color: var(--color-muted);"
 				>
 					<div class="text-caption font-medium">Default</div>
@@ -360,7 +360,7 @@
 				</div>
 
 				<div
-					class="bg-gray-100 p-4"
+					class="p-4"
 					style="border-radius: var(--radius-lg); background-color: var(--color-muted);"
 				>
 					<div class="text-caption font-medium">LG</div>

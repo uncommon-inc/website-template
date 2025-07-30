@@ -1,13 +1,13 @@
 @theme inline {
 	/* Theming */
-	--color-background: var(--color-white);
+	--color-background: oklch(1 0 0);
 	--color-foreground: var(--color-gray-950);
 
 	--color-card: var(--color-gray-50);
 	--color-card-foreground: var(--color-gray-950);
 	--color-card-hover: var(--color-gray-100);
 
-	--color-popover: var(--color-white);
+	--color-popover: oklch(1 0 0);
 	--color-popover-foreground: var(--color-gray-950);
 
 	--color-primary: var(--color-primary-600);
@@ -53,6 +53,11 @@
 	--radius-2xl: calc(var(--radius) * 3);
 	--radius-3xl: calc(var(--radius) * 4);
 	--radius-4xl: calc(var(--radius) * 5);
+
+	/* Spacing system - based on section spacing but available as CSS variables */
+	--spacing-px: 1rem; /* Base px equivalent for md+ */
+	--spacing-py: 4rem; /* Base py equivalent for md+ */
+	--spacing-py-sm: 2rem; /* Small py equivalent for md+ */
 }
 
 /* Uncomment this next block for dark mode. Do not remove this line. */
@@ -91,5 +96,10 @@
 		--color-sidebar-accent-foreground: var(--color-gray-50);
 		--color-sidebar-border: color-mix(in oklch, var(--color-gray-50), transparent 90%);
 		--color-sidebar-ring: var(--color-primary-600);
+
+		/* Keep same spacing variables in dark mode */
+		--spacing-px: 1rem;
+		--spacing-py: 4rem;
+		--spacing-py-sm: 2rem;
 	}
 } */

@@ -75,7 +75,7 @@
 				<div
 					bind:this={cards[index]}
 					class={[
-						"card bg-gray-50 opacity-0 dark:bg-gray-900",
+						"card bg-muted opacity-0",
 						"bg-cover",
 						"relative isolate grid aspect-[4/5] content-end items-end gap-10 overflow-hidden rounded-(--radius) bg-cover p-(--gap) [--inner-radius:calc(var(--radius)-var(--gap))] ",
 						type === "join" ? "bg-primary" : ""
@@ -98,13 +98,13 @@
 						<img
 							src={image}
 							alt=""
-							class="absolute top-1/2 left-1/2 size-[50%] max-h-10 -translate-x-1/2 -translate-y-1/2 object-contain opacity-70 saturate-0 dark:invert"
+							class="absolute top-1/2 left-1/2 size-[50%] max-h-10 -translate-x-1/2 -translate-y-1/2 object-contain opacity-70 saturate-0"
 						/>
 					{/if}
 
 					<div
 						class="text-caption z-10 {stakeholderType !== 'team'
-							? 'text-gray-700 dark:text-gray-50'
+							? 'text-foreground'
 							: 'text-white'}"
 					>
 						<div class={type === "join" ? "grid grid-cols-2 items-center" : ""}>

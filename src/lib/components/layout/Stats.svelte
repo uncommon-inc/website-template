@@ -38,9 +38,9 @@
 		<div class="grid grid-cols-1 gap-12 md:grid-cols-3 md:gap-8">
 			{#each stats as stat}
 				<div class="flex flex-col items-center text-center md:items-center">
-					<stat.icon class="text-primary-700 mb-4 h-8 w-8 opacity-80" />
-					<span class="text-title1 mb-2 text-gray-900 dark:text-gray-50">{stat.value}</span>
-					<span class="text-body text-gray-600 dark:text-gray-300">{stat.description}</span>
+					<stat.icon class="text-primary mb-4 h-8 w-8 opacity-80" />
+					<span class="text-title1 text-foreground mb-2">{stat.value}</span>
+					<span class="text-body text-muted-foreground">{stat.description}</span>
 				</div>
 			{/each}
 		</div>

@@ -44,16 +44,11 @@
 	{/if}
 	<div class="m-auto w-full max-w-prose overflow-hidden">
 		<Marquee
-			class="mask-image h-full items-center text-gray-400 [--gap:theme(spacing.6)] sm:[--gap:theme(spacing.12)]"
+			class="mask-image text-muted-foreground h-full items-center [--gap:theme(spacing.6)] sm:[--gap:theme(spacing.12)]"
 			speed={paused ? 0 : 0.1}
 		>
 			{#each logoUrls as logo, i}
-				<img
-					src={logo}
-					alt=""
-					class="mx-8 h-5 w-fit object-contain opacity-70 saturate-0 dark:invert
-					"
-				/>
+				<img src={logo} alt="" class="mx-8 h-5 w-fit object-contain opacity-70 saturate-0" />
 			{/each}
 		</Marquee>
 	</div>

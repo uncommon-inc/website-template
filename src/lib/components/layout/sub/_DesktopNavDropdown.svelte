@@ -30,10 +30,10 @@
 	class="data-[motion=from-end]:animate-enter-from-right data-[motion=from-start]:animate-enter-from-left data-[motion=to-end]:animate-exit-to-right data-[motion=to-start]:animate-exit-to-left top-0 left-0 w-max data-[state=closed]:hidden "
 	forceMount
 >
-	<div class={["grid min-w-40 gap-(--gap) p-(--gap)", hasImages && "grid-cols-2 items-start"]}>
+	<div class={["grid min-w-40 gap-4 p-4", hasImages && "grid-cols-2 items-start"]}>
 		{#if hasImages}
 			<div
-				class="relative grid aspect-square size-full max-h-full max-w-84 overflow-hidden rounded-(--inner-radius) bg-gray-100"
+				class="bg-muted relative grid aspect-square size-full max-h-full max-w-84 overflow-hidden rounded-md"
 			>
 				{#each item.children ?? [] as child, index}
 					<img
@@ -55,7 +55,7 @@
 				>
 					<NavigationMenu.Link
 						href={child.href}
-						class="link hover:bg-muted grid max-w-full grid-flow-row rounded-(--inner-radius) px-3.5 py-3 leading-none font-medium no-underline outline-hidden transition-colors select-none"
+						class="link hover:bg-muted focus:bg-accent focus:text-accent-foreground focus:ring-ring grid max-w-full grid-flow-row rounded-md px-3.5 py-3 leading-none font-medium no-underline outline-hidden transition-colors select-none focus:ring-2 focus:ring-offset-2"
 						><div class="grid max-h-[4em] max-w-[30ch] gap-2 leading-6 text-ellipsis">
 							<span class="inline-block">{child.label}</span>
 

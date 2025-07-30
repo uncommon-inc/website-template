@@ -32,19 +32,17 @@
 	{#each openingsByDepartment as { department, openings }}
 		<div class="grid w-full gap-4">
 			<div
-				class="text-callout flex w-full items-baseline justify-between gap-8 border-b border-gray-200 pb-2.5 !font-normal text-gray-500 dark:border-gray-800 dark:text-gray-400"
+				class="text-callout border-border text-muted-foreground flex w-full items-baseline justify-between gap-8 border-b pb-2.5 !font-normal"
 			>
 				<h3>{department}</h3>
-				<p class="text-gray-400 dark:text-gray-500">
+				<p class="text-muted-foreground">
 					{openings.length} open roles
 				</p>
 			</div>
 
 			<ul class="">
 				{#each openings as opening}
-					<li
-						class="group rounded bg-transparent transition duration-300 ease-out hover:bg-gray-200 hover:dark:bg-gray-900"
-					>
+					<li class="group hover:bg-muted rounded bg-transparent transition duration-300 ease-out">
 						<a
 							href={opening.url}
 							class="flex items-baseline gap-3 py-3 [--offset:--spacing(4)] *:transition *:duration-200 *:ease-out"
