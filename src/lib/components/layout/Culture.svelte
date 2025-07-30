@@ -36,7 +36,7 @@
 	});
 </script>
 
-<section class="bg-white dark:bg-gray-950" {...rest}>
+<section class="bg-background" {...rest}>
 	<div
 		class="section-py section-px container mx-auto grid gap-8 [--gap:--spacing(8)] [--radius:var(--radius-2xl)]"
 	>
@@ -47,15 +47,12 @@
 			style:grid-template-columns="repeat(auto-fit, minmax(280px, 1fr))"
 		>
 			{#each values as value, i}
-				<div
-					bind:this={cards[i]}
-					class="relative border-t border-gray-200 pt-4 dark:border-gray-900"
-				>
+				<div bind:this={cards[i]} class="border-border relative border-t pt-4">
 					<!-- Content -->
 					<div class="text-caption z-10">
 						<div>
 							<div class="text-headline mb-[1em]">{value.title}</div>
-							<div class="text-body text-gray-500 dark:text-gray-400">{value.description}</div>
+							<div class="text-body text-muted-foreground">{value.description}</div>
 						</div>
 					</div>
 				</div>

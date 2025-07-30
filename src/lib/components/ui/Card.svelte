@@ -23,7 +23,7 @@
 </script>
 
 <article
-	class="bg-card hover:bg-sidebar-primary-foreground hover:text-primary-900 border-border flex flex-col rounded-(--radius) border p-4 px-5 text-pretty transition duration-300 ease-out lg:p-5 lg:px-6 {customClass}"
+	class="bg-card text-card-foreground hover:bg-card-hover border-border flex flex-col rounded-lg border p-4 px-5 text-pretty transition duration-300 ease-out lg:p-5 lg:px-6 {customClass}"
 >
 	{#if icon || imageSrc}
 		<div class="mb-8">
@@ -33,12 +33,12 @@
 					<img
 						src={imageSrc}
 						alt={title}
-						class="w-full object-cover {imageAspect === '9/16' ? 'aspect-[9/16]' : 'aspect-[16/9]'}"
-						style="border-radius: max(2px, calc(var(--radius) - 1rem));"
+						class="w-full rounded-lg object-cover {imageAspect === '9/16'
+							? 'aspect-[9/16]'
+							: 'aspect-[16/9]'}"
 					/>
 					<div
-						class="absolute top-3 left-3 bg-white/90 p-1.5 backdrop-blur-sm"
-						style="border-radius: max(2px, calc(var(--radius) - 1.25rem));"
+						class="bg-background/90 border-border absolute top-3 left-3 rounded-sm border p-1.5 backdrop-blur-sm"
 					>
 						<Icon
 							class="size-4 {iconClass.includes('text-')
@@ -54,17 +54,18 @@
 				<img
 					src={imageSrc}
 					alt={title}
-					class="w-full object-cover {imageAspect === '9/16' ? 'aspect-[9/16]' : 'aspect-[16/9]'}"
-					style="border-radius: max(2px, calc(var(--radius) - 1rem));"
+					class="w-full rounded-lg object-cover {imageAspect === '9/16'
+						? 'aspect-[9/16]'
+						: 'aspect-[16/9]'}"
 				/>
 			{/if}
 		</div>
 	{/if}
 
 	<div class:mt-auto={icon || imageSrc}>
-		<h3 class="text-title3 mb-2">
+		<h3 class="text-title3 text-card-foreground mb-2">
 			{title}
 		</h3>
-		<p class="text-body max-w-prose opacity-60">{description}</p>
+		<p class="text-body text-muted-foreground max-w-prose">{description}</p>
 	</div>
 </article>

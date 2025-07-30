@@ -14,10 +14,10 @@
 	} = $props();
 </script>
 
-<header class="border-b border-gray-100 dark:border-gray-900" {...rest}>
+<header class="border-border border-b" {...rest}>
 	<div class="text-title3 section-px section-py container mx-auto grid gap-16 gap-y-0">
 		<SectionHeader {title} {subtitle} size="lg" />
-		<div class="aspect-video overflow-clip rounded-xl bg-gray-100">
+		<div class="bg-muted aspect-video overflow-clip rounded-xl">
 			<img
 				class="h-full w-full object-cover"
 				src={imageSrc}

@@ -56,9 +56,8 @@
 					{#each useCases as useCase, index}
 						<div class="group">
 							<button
-								class="text-title3 hover:text-primary-600 hover:dark:text-primary-300 row-start-1 mb-2 w-full text-left transition-colors"
-								class:text-primary-700={current === index}
-								class:dark:text-primary-400={current === index}
+								class="text-title3 hover:text-primary row-start-1 mb-2 w-full text-left transition-colors"
+								class:text-primary={current === index}
 								onpointerenter={() => (current = index)}
 							>
 								{useCase.title}
@@ -67,7 +66,7 @@
 					{/each}
 				</div>
 				<article class="row-start-2">
-					<p class="text-body text-gray-500">{useCases[current].description}</p>
+					<p class="text-body text-muted-foreground">{useCases[current].description}</p>
 					{#if useCases[current].link}
 						<div class="mt-6">
 							<Button href={useCases[current].link!.href} variant="secondary">
@@ -79,7 +78,7 @@
 			</div>
 
 			<!-- Right column: Featured image -->
-			<div class="grid overflow-clip rounded-(--radius) bg-gray-50">
+			<div class="bg-muted grid overflow-clip rounded-(--radius)">
 				{#key useCases[current]?.image}
 					<img
 						transition:fade={{ easing: cubicInOut, duration: 200 }}

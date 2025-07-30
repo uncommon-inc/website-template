@@ -23,7 +23,7 @@
 <div
 	bind:this={cards[index]}
 	class={[
-		"card bg-gray-50 dark:bg-gray-900",
+		"card bg-muted",
 		"h-full",
 		"relative isolate grid aspect-[4/5] content-end items-end gap-10 overflow-hidden rounded-(--radius) p-(--gap) [--inner-radius:calc(var(--radius)-var(--gap))] ",
 		type === "join" ? "bg-primary" : ""
@@ -46,12 +46,7 @@
 		</div>
 	{/if}
 
-	<div
-		class={[
-			"text-caption z-10",
-			stakeholderType !== "team" ? "text-gray-700 dark:text-gray-50" : "text-white"
-		]}
-	>
+	<div class={["text-caption z-10", stakeholderType !== "team" ? "text-foreground" : "text-white"]}>
 		<div class={type === "join" ? "grid grid-cols-2 items-center" : ""}>
 			<div>
 				<div>{name}</div>

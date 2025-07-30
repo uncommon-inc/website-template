@@ -15,19 +15,12 @@
 	const { items }: Props = $props();
 </script>
 
-<div
-	class={[
-		"relative flex items-center justify-end gap-5",
-		"rounded-(--outer-radius) [--outer-radius:var(--radius)]",
-		"[--gap:--spacing(1))]",
-		"[--inner-radius:calc(var(--outer-radius)-var(--gap))]"
-	]}
->
+<div class="relative flex items-center justify-end gap-5">
 	<NavigationMenu.Root class="text-foreground relative z-10 flex justify-end">
 		<NavigationMenu.List class="group flex list-none items-center justify-center gap-5 p-1">
 			{#each items as item}
 				<NavigationMenu.Item
-					class="after:bg-muted relative after:absolute after:-inset-x-2.5 after:-inset-y-1.5 after:-z-10 after:rounded-(--radius) after:opacity-0 after:transition after:duration-300 after:ease-out hover:after:opacity-100"
+					class="after:bg-muted relative after:absolute after:-inset-x-2.5 after:-inset-y-1.5 after:-z-10 after:rounded-md after:opacity-0 after:transition after:duration-300 after:ease-out hover:after:opacity-100"
 				>
 					{#if item.children}
 						<DesktopNavDropdown {item} />
@@ -47,7 +40,7 @@
 		<div class="absolute top-full right-0 justify-center perspective-[2000px]">
 			<NavigationMenu.Viewport
 				forceMount
-				class="text-popover-foreground bg-background data-[state=closed]:animate-scale-out data-[state=open]:animate-scale-in border-border  relative mt-2.5 h-[var(--bits-navigation-menu-viewport-height)] w-full origin-[top_center] overflow-hidden rounded-(--outer-radius) border p-(--gap) shadow-lg transition-[width,_height] duration-200 data-[state=closed]:pointer-events-none data-[state=closed]:translate-y-4 data-[state=closed]:opacity-0 sm:w-[var(--bits-navigation-menu-viewport-width)]"
+				class="text-popover-foreground bg-popover data-[state=closed]:animate-scale-out data-[state=open]:animate-scale-in border-border relative mt-2.5 h-[var(--bits-navigation-menu-viewport-height)] w-full origin-[top_center] overflow-hidden rounded-lg border p-4 shadow-lg transition-[width,_height] duration-200 data-[state=closed]:pointer-events-none data-[state=closed]:translate-y-4 data-[state=closed]:opacity-0 sm:w-[var(--bits-navigation-menu-viewport-width)]"
 			/>
 		</div>
 	</NavigationMenu.Root>
@@ -56,10 +49,30 @@
 </div>
 
 <style lang="postcss">
-	@reference '../../../../app.css';
-
 	:global(.link) {
-		@apply hover:text-accent-foreground focus:bg-muted focus:text-accent-foreground inline-flex w-full items-center transition-colors focus:outline-hidden disabled:pointer-events-none disabled:opacity-50;
+		display: inline-flex;
+		width: 100%;
+		align-items: center;
+		transition-property: color, background-color;
+		transition-duration: 150ms;
+		pointer-events: auto;
+		opacity: 1;
+
+		&:hover {
+			color: var(--color-accent-foreground);
+		}
+
+		&:focus {
+			background-color: var(--color-accent);
+			color: var(--color-accent-foreground);
+			outline: 2px solid var(--color-ring);
+			outline-offset: 2px;
+		}
+
+		&:disabled {
+			pointer-events: none;
+			opacity: 0.5;
+		}
 	}
 
 	:global([data-navigation-menu-content]) {

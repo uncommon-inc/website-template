@@ -145,7 +145,7 @@
 					class={[
 						"lg:container-xs  lg:min-w-[50%] lg:grid-cols-[2fr_3fr]",
 						"items-between grid grid-cols-1 gap-8",
-						"bg-card dark:text-white",
+						"bg-card text-card-foreground",
 						"aspect-video max-w-full min-w-full xl:aspect-[auto]",
 						"transform-gpu transition-transform duration-200 ease-[cubic-bezier(0.16,1,0.3,1)] will-change-transform",
 						"rounded-(--outer-radius) p-(--gap)",
@@ -192,10 +192,10 @@
 		<div class="absolute bottom-8 left-1/2 flex -translate-x-1/2 justify-center gap-2">
 			{#each testimonials as _, index}
 				<div
-					class="focus:ring-primary-500 bg-emphasis-dim size-1.5 rounded-full transition-all duration-300 ease-in-out dark:bg-gray-700"
+					class="focus:ring-primary bg-muted-foreground size-1.5 rounded-full transition-all duration-300 ease-in-out"
 					class:opacity-50={current !== index}
 					class:w-8={current === index}
-					class:dark:bg-gray-400={current === index}
+					class:bg-foreground={current === index}
 					aria-hidden="true"
 				></div>
 			{/each}

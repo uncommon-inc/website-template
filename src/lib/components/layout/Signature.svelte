@@ -1,7 +1,7 @@
 <a
 	href="https://unc.mn"
 	target="_blank"
-	class="group flex gap-3 text-gray-200 transition duration-300 hover:text-gray-500 dark:text-gray-800 dark:hover:text-gray-400"
+	class="group text-muted-foreground hover:text-foreground flex gap-3 transition duration-300"
 >
 	<p class="text-transparent group-hover:text-current">In partnership with Uncommon</p>
 

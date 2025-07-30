@@ -76,10 +76,8 @@
 </footer>
 
 <style lang="postcss">
-	@reference '../../../app.css';
-
 	a {
-		@apply inline-block underline decoration-transparent transition-all duration-300 ease-out;
+		@apply inline-block underline decoration-transparent transition-all duration-300;
 		color: var(--color-foreground);
 
 		&:hover {

@@ -36,7 +36,7 @@ A minimalist teaser for the about page.
 			/>
 
 			<!-- Team Member & CTA Section -->
-			<div class="grid items-center gap-8 dark:border-gray-800">
+			<div class="grid items-center gap-8">
 				<div class="flex items-center justify-start gap-4">
 					<img
 						src={teamMember.image}

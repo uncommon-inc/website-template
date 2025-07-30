@@ -186,22 +186,22 @@ Please update features according to the company's product offering. Do not remov
 		<SectionHeader {title} {subtitle} />
 
 		<div class="mb-8 flex justify-center">
-			<div class="inline-flex items-center gap-0.5 rounded-full bg-gray-200 p-0.5">
+			<div class="bg-muted inline-flex items-center gap-0.5 rounded-full p-0.5">
 				<button
 					class="rounded-full px-4 py-1.5 text-sm font-semibold transition-all duration-200 {!annual
-						? 'bg-white text-gray-900 shadow-sm'
-						: 'text-gray-600 hover:text-gray-900'}"
+						? 'bg-background text-foreground shadow-sm'
+						: 'text-muted-foreground hover:text-foreground'}"
 					onclick={() => (annual = false)}
 				>
 					Monthly
 				</button>
 				<button
 					class="rounded-full px-4 py-1.5 text-sm font-semibold transition-all duration-200 {annual
-						? 'bg-white text-gray-900 shadow-sm'
-						: 'text-gray-600 hover:text-gray-900'}"
+						? 'bg-background text-foreground shadow-sm'
+						: 'text-muted-foreground hover:text-foreground'}"
 					onclick={() => (annual = true)}
 				>
-					Annual <span class="ml-1 text-xs text-gray-500">Save 20%</span>
+					Annual <span class="text-muted-foreground ml-1 text-xs">Save 20%</span>
 				</button>
 			</div>
 		</div>
@@ -210,20 +210,19 @@ Please update features according to the company's product offering. Do not remov
 	<div class="bb grid gap-6 md:grid-cols-2 lg:grid-cols-3">
 		{#each tiers as tier}
 			<div
-				class="flex flex-col rounded-xl bg-white p-6 ring ring-gray-200 transition-all duration-300 dark:bg-gray-800 dark:ring-gray-700"
+				class="bg-card ring-border flex flex-col rounded-xl p-6 ring transition-all duration-300"
 				class:ring-2={tier.highlight}
 				class:ring-primary={tier.highlight}
-				class:dark:ring-primary-700={tier.highlight}
 				class:translate-y-[-4px]={tier.highlight}
 			>
 				<div class="mb-8">
-					<h3 class="text-title3 mb-4 dark:text-white">{tier.name}</h3>
+					<h3 class="text-title3 text-card-foreground mb-4">{tier.name}</h3>
 					<div class="mt-2 flex items-baseline">
 						{#if tier.monthlyPrice === null && tier.yearlyPrice === null}
-							<span class="text-title2 dark:text-white">Custom</span>
+							<span class="text-title2 text-card-foreground">Custom</span>
 						{:else}
 							<NumberFlow
-								class="text-title2 [&::part\(suffix\)]:text-caption dark:text-white"
+								class="text-title2 [&::part\(suffix\)]:text-caption text-card-foreground"
 								format={{
 									style: "currency",
 									currency: "USD",
@@ -234,7 +233,7 @@ Please update features according to the company's product offering. Do not remov
 							/>
 						{/if}
 					</div>
-					<p class="text-callout text-emphasis-medium mt-3 dark:text-gray-300">
+					<p class="text-callout text-muted-foreground mt-3">
 						{tier.description}
 					</p>
 				</div>
@@ -243,8 +242,8 @@ Please update features according to the company's product offering. Do not remov
 					<ul class="space-y-3">
 						{#each tier.features as feature}
 							<li class="flex items-center gap-2">
-								<IconCheck class="text-primary-600 dark:text-primary-400 size-5 flex-shrink-0" />
-								<span class="text-body text-emphasis-medium dark:text-gray-300">{feature}</span>
+								<IconCheck class="text-primary size-5 flex-shrink-0" />
+								<span class="text-body text-muted-foreground">{feature}</span>
 							</li>
 						{/each}
 					</ul>
@@ -325,7 +324,7 @@ Please update features according to the company's product offering. Do not remov
 								<span class="sr-only">Feature</span>
 							</th>
 							{#each tierNames as tierName, i}
-								<th class="text-caption min-w-[100px] py-3 text-left dark:text-white">
+								<th class="text-caption text-foreground min-w-[100px] py-3 text-left">
 									{tierName}
 								</th>
 							{/each}
@@ -334,19 +333,19 @@ Please update features according to the company's product offering. Do not remov
 					<tbody class="divide-border divide-y">
 						{#each features as feature}
 							<tr>
-								<td class="text-body py-3 pr-8 font-medium lg:pr-0 dark:text-white">
+								<td class="text-body text-foreground py-3 pr-8 font-medium lg:pr-0">
 									{feature.name}
 								</td>
 								{#each tierNames as tierName, i}
 									<td class="py-3">
 										{#if typeof feature.tiers[tierName] === "boolean"}
 											{#if feature.tiers[tierName]}
-												<IconCheck class="text-primary-900 dark:text-primary-400 size-5" />
+												<IconCheck class="text-primary size-5" />
 											{:else}
-												<IconX class="size-5 text-gray-400" />
+												<IconX class="text-muted-foreground size-5" />
 											{/if}
 										{:else}
-											<span class="text-callout font-medium text-gray-700 dark:text-gray-300">
+											<span class="text-callout text-muted-foreground font-medium">
 												{feature.tiers[tierName]}
 											</span>
 										{/if}
@@ -363,9 +362,7 @@ Please update features according to the company's product offering. Do not remov
 </section>
 
 <style lang="postcss">
-	@reference '../../../app.css';
-
 	:global(number-flow-svelte)::part(suffix) {
-		@apply text-sm text-gray-400 dark:text-gray-500;
+		@apply text-muted-foreground text-sm;
 	}
 </style>

@@ -28,7 +28,7 @@
 			{#each data.content.sections as section}
 				<section>
 					<h2 class="text-headline mb-3">{section.title}</h2>
-					<p class="text-body text-gray-700">
+					<p class="text-body text-foreground">
 						{section.body}
 					</p>
 				</section>

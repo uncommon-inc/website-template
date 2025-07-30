@@ -51,10 +51,8 @@
 					const computedStyle = window.getComputedStyle(navElement);
 					themeColor = computedStyle.backgroundColor || computedStyle.background;
 				} else {
-					// Fallback with theme-aware default
-					themeColor = document.documentElement.classList.contains("dark")
-						? "hsl(var(--background))" // dark mode fallback using CSS variable
-						: "hsl(var(--background))"; // light mode fallback using CSS variable
+					// Fallback using CSS variable
+					themeColor = "hsl(var(--background))";
 				}
 			} else {
 				// Restore normal scrolling
@@ -104,7 +102,7 @@
 	]}
 	data-show={isMenuOpen || null}
 >
-	<ul class="nav-list container mx-auto divide-y *:border-gray-200">
+	<ul class="nav-list *:border-border container mx-auto divide-y">
 		{#each items as item, index}
 			{@render linkOrGroup(item, index)}
 		{/each}
@@ -138,7 +136,7 @@
 	{#if item.children}
 		<details class="group transition-all duration-300 ease-out">
 			<summary
-				class="section-px nav-item text-title2 text-foreground hover:bg-muted flex cursor-pointer list-none items-center justify-between transition-all select-none group-open:font-medium"
+				class="section-px nav-item text-title2 text-foreground hover:bg-muted focus:bg-accent focus:text-accent-foreground focus:ring-ring flex cursor-pointer list-none items-center justify-between transition-all select-none group-open:font-medium focus:ring-2 focus:ring-offset-2 focus:outline-hidden"
 				>{item.label}
 				<IconChevronRight class="transition duration-300 ease-out group-open:rotate-90" /></summary
 			>
@@ -154,7 +152,7 @@
 	{:else}
 		<a
 			href={item?.href}
-			class="section-px group nav-item hover:bg-muted text-title2 flex flex-col transition-all duration-300 ease-out"
+			class="section-px group nav-item hover:bg-muted focus:bg-accent focus:text-accent-foreground focus:ring-ring text-title2 flex flex-col transition-all duration-300 ease-out focus:ring-2 focus:ring-offset-2 focus:outline-hidden"
 			aria-label={item.label}
 		>
 			<span
@@ -171,9 +169,9 @@
 {/snippet}
 
 <style lang="postcss">
-	@reference '../../../../app.css';
 	.nav-item {
-		@apply py-2.5;
+		padding-top: 0.625rem;
+		padding-bottom: 0.625rem;
 	}
 
 	/* Hide default details marker */
